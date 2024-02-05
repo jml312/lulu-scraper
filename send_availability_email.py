@@ -5,6 +5,7 @@ def send_availability_email(lulu_data):
   findings = []
   for (url, size_to_check, item_name) in lulu_data:
     try:
+      size_to_check = " ".join(size_to_check.split("_"))
       is_available, price = get_product_details(url, size_to_check)
       
       if is_available == None:
