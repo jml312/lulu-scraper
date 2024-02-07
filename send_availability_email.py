@@ -12,14 +12,17 @@ def send_availability_email(lulu_data):
         continue
       
       text = f"<a href='{url}'>{item_name}</a> ({price}) in size {size_to_check.upper()} is {'AVAILABLE ✅' if is_available else 'NOT AVAILABLE ❌'}"
-      findings.append(text)  
+      findings.append((text, is_available))  
     except Exception:
       continue
     
+  if all(not f[1] for f in findings):
+    return "Nothing available", 400
+    
   title = "Lulu Availability Report"
   body = "<ul>"
-  for finding in findings:
-    body += f"<li>{finding}</li>" 
+  for text, _ in findings:
+    body += f"<li>{text}</li>" 
   body += "</ul>"
   
   return send_email(title, body)
