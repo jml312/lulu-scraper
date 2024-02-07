@@ -17,7 +17,7 @@ def send_availability_email(lulu_data):
       continue
     
   if all(not f[1] for f in findings):
-    return "Nothing available", 400
+    return "Nothing available 😢", 400
     
   title = "Lulu Availability Report"
   body = "<ul>"
